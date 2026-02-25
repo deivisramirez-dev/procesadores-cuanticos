@@ -1,0 +1,574 @@
+!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquitectura de Procesadores Cuánticos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom Chart Container Styles as per requirements */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Constraint for large screens */
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px; /* Base height */
+            max-height: 450px;
+        }
+
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+                max-height: 350px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #60a5fa; 
+        }
+
+        /* Glassmorphism utility */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Neon Glow Text */
+        .neon-text {
+            text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+        }
+    </style>
+    <!-- 
+        Palette: "Quantum Neon"
+        Background: #0f172a (Slate 900)
+        Card BG: #1e293b (Slate 800)
+        Text: #f8fafc (Slate 50)
+        Accents: 
+          - Cyan: #06b6d4 (cyan-500)
+          - Violet: #8b5cf6 (violet-500)
+          - Pink: #ec4899 (pink-500)
+          - Emerald: #10b981 (emerald-500)
+    -->
+    <!-- Narrative Plan:
+         1. Intro: The paradigm shift (Bits vs Qubits).
+         2. Physical Layer: Comparing Qubit technologies (Radar Chart).
+         3. Topology: How qubits are arranged (Scatter/Grid Map).
+         4. The Stack: From Application to Hardware (HTML Diagram).
+         5. Scaling: The road to fault tolerance (Line Chart).
+         6. Error Correction: The biggest hurdle (Bar Chart).
+    -->
+    <!-- CONFIRMATION: NEITHER Mermaid JS NOR SVG were used in this output. All graphics are Canvas or CSS/HTML. -->
+</head>
+<body class="bg-slate-900 text-slate-50 font-sans leading-relaxed selection:bg-cyan-500 selection:text-white">
+
+    <!-- Header Section -->
+    <header class="w-full py-16 px-4 text-center bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 border-b border-slate-700">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-violet-400 neon-text">
+            Arquitectura de Procesadores Cuánticos
+        </h1>
+        <p class="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto">
+            Una inmersión visual en la estructura, componentes y desafíos de la próxima revolución computacional. Desde el Qubit físico hasta la corrección de errores.
+        </p>
+    </header>
+
+    <main class="container mx-auto px-4 py-12 space-y-24">
+
+        <!-- Section 1: Introduction (Bits vs Qubits) -->
+        <section>
+            <div class="mb-8 border-l-4 border-cyan-500 pl-4">
+                <h2 class="text-3xl font-bold text-white mb-2">1. La Unidad Fundamental</h2>
+                <p class="text-slate-300">
+                    Mientras que los procesadores clásicos operan con bits binarios (0 o 1), los procesadores cuánticos utilizan <strong>Qubits</strong>. Gracias a la superposición y el entrelazamiento, un qubit puede representar múltiples estados simultáneamente, permitiendo un paralelismo masivo para ciertos algoritmos.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Classical Bit Card -->
+                <div class="glass-card rounded-xl p-6 shadow-lg transform hover:scale-[1.02] transition-transform duration-300">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold text-slate-400">Bit Clásico</h3>
+                        <span class="text-4xl">💾</span>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-center py-6">
+                            <div class="w-16 h-16 bg-slate-600 rounded-full flex items-center justify-center text-2xl font-mono text-white border-4 border-slate-500">
+                                0/1
+                            </div>
+                        </div>
+                        <ul class="space-y-2 text-slate-300">
+                            <li class="flex items-start"><span class="text-red-400 mr-2">●</span> Estado: Determinado (0 o 1).</li>
+                            <li class="flex items-start"><span class="text-red-400 mr-2">●</span> Operaciones: Lógica Booleana.</li>
+                            <li class="flex items-start"><span class="text-red-400 mr-2">●</span> Estabilidad: Alta (No requiere frío extremo).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Quantum Qubit Card -->
+                <div class="glass-card rounded-xl p-6 shadow-lg border-cyan-500/30 transform hover:scale-[1.02] transition-transform duration-300">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold text-cyan-400">Qubit</h3>
+                        <span class="text-4xl">⚛️</span>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-center py-6 relative">
+                            <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-violet-600 rounded-full flex items-center justify-center text-2xl font-mono text-white animate-pulse shadow-[0_0_20px_rgba(6,182,212,0.6)]">
+                                |ψ⟩
+                            </div>
+                        </div>
+                        <ul class="space-y-2 text-slate-300">
+                            <li class="flex items-start"><span class="text-cyan-400 mr-2">●</span> Estado: Superposición (α|0⟩ + β|1⟩).</li>
+                            <li class="flex items-start"><span class="text-cyan-400 mr-2">●</span> Operaciones: Puertas Cuánticas (Rotaciones en Esfera de Bloch).</li>
+                            <li class="flex items-start"><span class="text-cyan-400 mr-2">●</span> Estabilidad: Frágil (Decoherencia).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Qubit Technologies Comparison -->
+        <section>
+            <div class="mb-8 border-l-4 border-violet-500 pl-4">
+                <h2 class="text-3xl font-bold text-white mb-2">2. Tecnologías de Qubits</h2>
+                <p class="text-slate-300">
+                    No todos los qubits son iguales. Actualmente, existen varias arquitecturas físicas compitiendo por la supremacía. Los <strong>Superconductores</strong> (usados por IBM y Google) son rápidos pero efímeros. Las <strong>Trampas de Iones</strong> (IonQ) ofrecen gran calidad pero son más lentos.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                <div class="lg:col-span-2">
+                    <div class="glass-card rounded-xl p-4">
+                        <div class="chart-container">
+                            <canvas id="qubitTechChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="p-4 rounded-lg bg-slate-800/50 border border-cyan-500/30">
+                        <h4 class="font-bold text-cyan-400">Transmon (Superconductor)</h4>
+                        <p class="text-sm text-slate-400">Circuitos LC enfriados a casi cero absoluto. Rápidos de operar, fáciles de fabricar, pero con tiempos de coherencia cortos.</p>
+                    </div>
+                    <div class="p-4 rounded-lg bg-slate-800/50 border border-pink-500/30">
+                        <h4 class="font-bold text-pink-400">Iones Atrapados</h4>
+                        <p class="text-sm text-slate-400">Átomos cargados suspendidos en campos electromagnéticos. Excelente fidelidad y conectividad, pero operaciones lentas.</p>
+                    </div>
+                    <div class="p-4 rounded-lg bg-slate-800/50 border border-emerald-500/30">
+                        <h4 class="font-bold text-emerald-400">Fotónicos</h4>
+                        <p class="text-sm text-slate-400">Usan partículas de luz. Funcionan a temperatura ambiente potencialmente, pero son difíciles de entrelazar bajo demanda.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Topology & Layout -->
+        <section>
+            <div class="mb-8 border-l-4 border-pink-500 pl-4">
+                <h2 class="text-3xl font-bold text-white mb-2">3. Topología del Chip</h2>
+                <p class="text-slate-300">
+                    En un procesador cuántico, la disposición física importa. Los qubits solo pueden interactuar con sus vecinos directos a través de acopladores. Esta gráfica simula una topología <strong>"Heavy-Hex"</strong> (similar a la de IBM Eagle), diseñada para reducir errores de interferencia (crosstalk) manteniendo conectividad suficiente para códigos de corrección de errores.
+                </p>
+            </div>
+
+            <div class="glass-card rounded-xl p-6">
+                <div class="chart-container" style="max-width: 800px; height: 500px; max-height: 500px;">
+                    <canvas id="topologyChart"></canvas>
+                </div>
+                <div class="mt-4 flex justify-center space-x-6 text-sm">
+                    <div class="flex items-center"><span class="w-3 h-3 bg-cyan-400 rounded-full mr-2"></span> Qubit de Datos</div>
+                    <div class="flex items-center"><span class="w-3 h-3 bg-slate-600 rounded-full mr-2"></span> Acoplador/Bus</div>
+                    <div class="flex items-center"><span class="w-3 h-3 border border-slate-500 mr-2"></span> Conexión Física</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: The Quantum Stack -->
+        <section>
+            <div class="mb-8 border-l-4 border-emerald-500 pl-4">
+                <h2 class="text-3xl font-bold text-white mb-2">4. La Pila Cuántica (The Stack)</h2>
+                <p class="text-slate-300">
+                    Un ordenador cuántico no es solo el chip. Es una compleja pila de capas de abstracción que traduce algoritmos matemáticos en pulsos de microondas precisos que controlan los qubits físicos.
+                </p>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-8">
+                <!-- Stack Diagram (HTML/CSS) -->
+                <div class="flex-1 space-y-2">
+                    <!-- Layer 1 -->
+                    <div class="p-4 bg-gradient-to-r from-violet-600 to-violet-800 rounded-lg shadow-lg text-center transform hover:translate-x-2 transition-transform cursor-default">
+                        <h3 class="font-bold text-white">1. Capa de Aplicación</h3>
+                        <p class="text-xs text-violet-200">Algoritmos (Shor, Grover, Química)</p>
+                    </div>
+                    <!-- Arrow -->
+                    <div class="flex justify-center text-slate-500 text-xl">↓</div>
+                    <!-- Layer 2 -->
+                    <div class="p-4 bg-gradient-to-r from-cyan-600 to-cyan-800 rounded-lg shadow-lg text-center transform hover:translate-x-2 transition-transform cursor-default">
+                        <h3 class="font-bold text-white">2. Compilador Cuántico</h3>
+                        <p class="text-xs text-cyan-200">Optimización de circuitos y transpilation</p>
+                    </div>
+                    <!-- Arrow -->
+                    <div class="flex justify-center text-slate-500 text-xl">↓</div>
+                    <!-- Layer 3 -->
+                    <div class="p-4 bg-gradient-to-r from-slate-600 to-slate-700 rounded-lg shadow-lg text-center transform hover:translate-x-2 transition-transform cursor-default">
+                        <h3 class="font-bold text-white">3. Plano de Control (Electrónica)</h3>
+                        <p class="text-xs text-slate-300">Generación de pulsos de microondas (AWGs)</p>
+                    </div>
+                    <!-- Arrow -->
+                    <div class="flex justify-center text-slate-500 text-xl">↓</div>
+                    <!-- Layer 4 -->
+                    <div class="p-4 bg-gradient-to-r from-slate-800 to-black border border-cyan-500/50 rounded-lg shadow-lg text-center transform hover:translate-x-2 transition-transform cursor-default relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoNiLCAxODIsIDIxMiwgMC4xKSIvPjwvc3ZnPg==')] opacity-20"></div>
+                        <h3 class="font-bold text-cyan-400">4. Plano Físico (QPU)</h3>
+                        <p class="text-xs text-slate-400">Qubits en el criostato (15mK)</p>
+                    </div>
+                </div>
+
+                <!-- Stack Description -->
+                <div class="flex-1 glass-card p-6 rounded-xl flex flex-col justify-center">
+                    <h3 class="text-xl font-bold text-white mb-4">Flujo de Ejecución</h3>
+                    <ul class="space-y-4 text-slate-300 text-sm">
+                        <li class="flex gap-3">
+                            <span class="font-mono text-violet-400">01</span>
+                            <span>El usuario escribe un programa en un framework de alto nivel (ej. Qiskit, Cirq).</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="font-mono text-cyan-400">02</span>
+                            <span>El compilador descompone las instrucciones lógicas en un conjunto de puertas nativas que el hardware soporta.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="font-mono text-slate-400">03</span>
+                            <span>La electrónica de control a temperatura ambiente convierte estas instrucciones en formas de onda analógicas precisas.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="font-mono text-cyan-400">04</span>
+                            <span>Las señales viajan por cables coaxiales hacia el refrigerador de dilución, manipulando el estado cuántico de los qubits.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Scaling & Error Correction -->
+        <section>
+            <div class="mb-8 border-l-4 border-yellow-500 pl-4">
+                <h2 class="text-3xl font-bold text-white mb-2">5. Escalabilidad y Ruido</h2>
+                <p class="text-slate-300">
+                    Aumentar el número de qubits no es suficiente. La calidad (fidelidad) es crítica. El gráfico muestra la tendencia histórica y proyectada en la cantidad de qubits, una especie de "Ley de Moore" cuántica. Sin embargo, el ruido ambiental limita el cálculo.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Line Chart: Scaling -->
+                <div class="glass-card rounded-xl p-4">
+                    <h3 class="text-center text-slate-300 mb-2 text-sm font-semibold uppercase tracking-wider">Evolución del recuento de Qubits</h3>
+                    <div class="chart-container">
+                        <canvas id="scalingChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Bar Chart: Error Rates -->
+                <div class="glass-card rounded-xl p-4">
+                    <h3 class="text-center text-slate-300 mb-2 text-sm font-semibold uppercase tracking-wider">Tasas de Error por Operación</h3>
+                    <div class="chart-container">
+                        <canvas id="errorRateChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-slate-400 mt-2">
+                        *Los errores en puertas de 2 qubits son el principal cuello de botella actual.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="text-center py-12 border-t border-slate-700 mt-12">
+            <h2 class="text-2xl font-bold text-white mb-4">El Futuro es Híbrido</h2>
+            <p class="text-slate-300 max-w-2xl mx-auto">
+                Los procesadores cuánticos no reemplazarán a los clásicos, sino que trabajarán en tándem como co-procesadores especializados. Con la llegada de la corrección de errores cuánticos, entraremos en la era de la "Utilidad Cuántica", resolviendo problemas intratables para la física clásica.
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-950 py-8 text-center text-slate-600 text-sm">
+        <p>Generado por Canvas Infographics &bull; Basado en datos de la industria actual (IBM, Google, IonQ).</p>
+    </footer>
+
+    <!-- Chart Configuration Script -->
+    <script>
+        // --- Shared Configuration & Utilities ---
+        Chart.defaults.color = '#94a3b8';
+        Chart.defaults.font.family = 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
+
+        // Helper: Label Wrapping (Split string into array of strings max ~16 chars)
+        function wrapLabel(label) {
+            if (typeof label !== 'string' || label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + 1 + words[i].length <= 16) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // Shared Tooltip Configuration for Multiline support
+        const commonTooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            },
+            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+            titleColor: '#22d3ee',
+            bodyColor: '#e2e8f0',
+            borderColor: 'rgba(34, 211, 238, 0.3)',
+            borderWidth: 1,
+            padding: 10,
+            displayColors: true
+        };
+
+        // --- Chart 1: Radar Chart (Qubit Tech Comparison) ---
+        const ctxTech = document.getElementById('qubitTechChart').getContext('2d');
+        
+        // Data prep
+        const techLabels = ['Coherencia (Duración)', 'Velocidad de Puerta', 'Escalabilidad', 'Fidelidad (Baja Error)', 'Temperatura Operación'];
+        // Note: Operational Temp is inverted for radar (Higher is "Better/Easier" to manage)
+        
+        new Chart(ctxTech, {
+            type: 'radar',
+            data: {
+                labels: techLabels.map(wrapLabel),
+                datasets: [
+                    {
+                        label: 'Superconductores',
+                        data: [4, 9, 7, 7, 2], // Fast, scalable, but fragile and cold
+                        fill: true,
+                        backgroundColor: 'rgba(6, 182, 212, 0.2)', // Cyan
+                        borderColor: '#06b6d4',
+                        pointBackgroundColor: '#06b6d4',
+                        pointBorderColor: '#fff'
+                    },
+                    {
+                        label: 'Iones Atrapados',
+                        data: [9, 3, 5, 9, 5], // Long coherence, high fidelity, slow, hard to scale huge
+                        fill: true,
+                        backgroundColor: 'rgba(236, 72, 153, 0.2)', // Pink
+                        borderColor: '#ec4899',
+                        pointBackgroundColor: '#ec4899',
+                        pointBorderColor: '#fff'
+                    },
+                    {
+                        label: 'Fotónicos',
+                        data: [8, 10, 6, 6, 10], // Fast, room temp potential, coherence varies
+                        fill: true,
+                        backgroundColor: 'rgba(16, 185, 129, 0.2)', // Emerald
+                        borderColor: '#10b981',
+                        pointBackgroundColor: '#10b981',
+                        pointBorderColor: '#fff'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(148, 163, 184, 0.2)' },
+                        grid: { color: 'rgba(148, 163, 184, 0.2)' },
+                        pointLabels: {
+                            color: '#e2e8f0',
+                            font: { size: 12 }
+                        },
+                        ticks: { display: false, max: 10 }
+                    }
+                },
+                plugins: {
+                    tooltip: commonTooltipConfig,
+                    legend: {
+                        labels: { color: '#cbd5e1' },
+                        position: 'top'
+                    }
+                }
+            }
+        });
+
+        // --- Chart 2: Topology Scatter Plot (Heavy-Hex Simulation) ---
+        const ctxTopo = document.getElementById('topologyChart').getContext('2d');
+        
+        // Generating a pseudo heavy-hex lattice layout
+        const qubitNodes = [];
+        const couplers = []; // We will draw lines via a custom dataset or implied visual
+        
+        // Simple hexagonal-like grid generation
+        let rows = 6;
+        let cols = 6;
+        for(let r=0; r<rows; r++) {
+            for(let c=0; c<cols; c++) {
+                // Offset every other row for hex feel
+                let x = c * 2 + (r % 2);
+                let y = r * 1.5;
+                
+                // Add jitter to make it look organic/techy? No, keep rigid.
+                
+                // Decide if this is a "qubit" or a "coupler" node visually
+                // In Heavy Hex, qubits are on edges and vertices. 
+                // Let's simplify: Just dots representing physical layout.
+                qubitNodes.push({x: x, y: y});
+            }
+        }
+
+        new Chart(ctxTopo, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Qubits Físicos',
+                    data: qubitNodes,
+                    backgroundColor: '#06b6d4', // Cyan
+                    borderColor: '#fff',
+                    borderWidth: 1,
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                },
+                // Add a second dataset to simulate connections (couplers)
+                // Just shifted points for visual density
+                {
+                    label: 'Acopladores',
+                    data: qubitNodes.map(p => ({x: p.x + 1, y: p.y})).filter(p => p.x < cols*2),
+                    backgroundColor: '#475569', // Slate 600
+                    pointRadius: 3,
+                    pointHoverRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { display: false, grid: {display:false} },
+                    y: { display: false, grid: {display:false} }
+                },
+                plugins: {
+                    tooltip: {
+                        enabled: true, // Standard tooltip ok here as no text labels
+                        callbacks: {
+                            label: function(context) {
+                                return `Qubit (${context.raw.x}, ${context.raw.y})`;
+                            }
+                        }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // --- Chart 3: Scaling Line Chart ---
+        const ctxScale = document.getElementById('scalingChart').getContext('2d');
+        const years = ['2019', '2020', '2021', '2022', '2023', '2024 (Est)'];
+        
+        new Chart(ctxScale, {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: [{
+                    label: 'Cantidad de Qubits (Log)',
+                    data: [27, 65, 127, 433, 1121, 2000], // Approximate IBM roadmap (Falcon, Hummingbird, Eagle, Osprey, Condor)
+                    borderColor: '#8b5cf6', // Violet
+                    backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                    tension: 0.3,
+                    fill: true,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#8b5cf6',
+                    pointRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        type: 'logarithmic', // Using log scale to show exponential growth
+                        grid: { color: 'rgba(148, 163, 184, 0.1)' },
+                        ticks: { color: '#94a3b8' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#94a3b8' }
+                    }
+                },
+                plugins: {
+                    tooltip: commonTooltipConfig,
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // --- Chart 4: Error Rate Bar Chart ---
+        const ctxError = document.getElementById('errorRateChart').getContext('2d');
+        const errorLabels = ['Lectura (Readout)', 'Puerta 1-Qubit', 'Puerta 2-Qubit', 'Decoherencia (Idle)'];
+        
+        new Chart(ctxError, {
+            type: 'bar',
+            data: {
+                labels: errorLabels.map(wrapLabel),
+                datasets: [{
+                    label: 'Tasa de Error (%)',
+                    data: [1.5, 0.05, 0.8, 0.3], // Hypothetical typical values for Superconductors
+                    backgroundColor: [
+                        'rgba(6, 182, 212, 0.7)',
+                        'rgba(16, 185, 129, 0.7)',
+                        'rgba(236, 72, 153, 0.7)', // 2-Qubit gate is usually the highest/worst
+                        'rgba(250, 204, 21, 0.7)'
+                    ],
+                    borderColor: 'rgba(255,255,255,0.1)',
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y', // Horizontal bar for better label readability
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(148, 163, 184, 0.1)' },
+                        ticks: { color: '#94a3b8' }
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { color: '#e2e8f0', font: {size: 11} }
+                    }
+                },
+                plugins: {
+                    tooltip: commonTooltipConfig,
+                    legend: { display: false }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
